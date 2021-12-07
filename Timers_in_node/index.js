@@ -8,9 +8,6 @@
  * This function returns a timer Object ID, you can pass this ID to clearTimeout(timeoutID)
  * before the delayMillisecond expires to cancel the timeout function
  */
-setTimeout(()=> {
-  console.log('Timeout function is executed');
-},'2000');
 
 var fs = require ("fs");
 
@@ -33,3 +30,13 @@ process.nextTick(() => {
 process.nextTick(() => {
   console.log("Next Tick 2 Executed");
 });
+
+setTimeout(()=> {
+  console.log('Timeout function is executed');
+});
+
+/**
+ * Note : Order of execution
+ * Non-I/O loops : Execution order process.nextTick() > setTimeOut() >setImmediate() and other timers in non I/O loops
+ * I/O loops : Execution order process.nextTick() > setImmediate() > setTimeOut()  and other timers in non I/O loops
+ */
